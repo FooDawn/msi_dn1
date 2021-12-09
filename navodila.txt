@@ -1,0 +1,25 @@
+Homework: automating deployment of GNS3
+
+Your freshman colleagues will use GNS3 (https://gns3.com, https://github.com/GNS3) during their Computer communications course. As you used GNS3 yourself, you know that on Mac and Windows:
+
+    it uses two components (GUI and "server VM"), 
+    nested virtualization (GNS3 runs network devices as nested VMs inside server VM) and 
+    that some of your less experienced colleagues will undoubtedly have really messed up laptops/computers (e.g. we had a case where one of them was running 3 (yes, three!) antivirus programs...). 
+
+We want to make their life a little easier and automate provisioning and running the whole setup in the cloud (or external on-premise VM). The desired workflow is:
+
+    student deploys a vanilla VM in a cloud of his choice and bootstraps it with your cloud-init script
+    script needs to automatically install and configure everything
+    GNS3 is now (securely!) accessible over just a web browser. Don't forget to include all necessary tools (Wireshark etc).
+
+So the task is: automate creating and provisioning a VM that will enable a simple deployment and usage of GNS3 with nothing more than a web browser. Use Linux as a VM "host", you'll also need to somehow enable using regular GUI programs in that VM. You can use anything you like: VNC, RDP, HTML5 viewer like Apache Guacamole, etc.  
+
+Make 2 versions: one to run with Vagrant (yes, this is just to practice writing Vagrantfiles ;)) and the second (the one we actually expect for them to use in practice) is to run it with cloud-init. You can develop this either locally (e.g. with multipass) or in a cloud (just use free student accounts). Pro tip for writing complex cloud-configs: cloud-init has a default order of execution for different cloud-init sections (e.g. check how are sequenced runcmd and write_files)...
+
+As GNS3-web-ui didn't have all the functionality of a regular GUI (at least it didn't in last year), don't use it as a replacement for regular desktop GUI client. But you can enable it as an extra feature.
+
+Grading will be done based on speed of deployment, quality, ease of use, documentation, security and all around performance of your solution. You can do this only with one tech stack (just either Vagrant or cloud-init), but that will impact the grade. You are also required to include a comprehensive technical README with screenshots of your solution in action.
+
+Use GitHub repository and make commits as you develop the solution (Infra as Code). Repository must be private, you just add me (my GH handle is "matjazp") as a collaborator so I can access the repository for grading.
+
+Submit a link to your private GH repository and a snapshot of it as a compressed file.
