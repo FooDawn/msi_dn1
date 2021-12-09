@@ -10,8 +10,8 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  # config.vm.box = "ubuntu/focal64"
-  config.vm.box = "generic/alpine314"
+  config.vm.box = "ubuntu/focal64"
+  # config.vm.box = "generic/alpine314"
 
   
   # via 127.0.0.1 to disable public access
@@ -35,35 +35,24 @@ Vagrant.configure("2") do |config|
   end
   
   config.vm.provision "shell", inline: <<-SCRIPT
-  echo "PRVI UPDATE"
-  apk update 
-  # DEBIAN_FRONTEND=noninteractive apk upgrade -y
+  apt update 
+  DEBIAN_FRONTEND=noninteractive apt upgrade -y
 
   # GUI 
-  # DEBIAN_FRONTEND=noninteractive apt-get install -y xfce4 virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
-  DEBIAN_FRONTEND=noninteractive apk add xfce4 xfce4-terminal xfce4-screensaver lightdm-gtk-greeter 
-  
-  # tuki so neki problemi
-  rc-service dbus start
-  rc-update add dbus
-  rc-service lightdm start
-  rc-update add lightdm
+  DEBIAN_FRONTEND=noninteractive apt-get install -y xfce4 virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
   
   # VBox dodatki
-  # VBoxClient --clipboard
-  # VBoxClient --draganddrop
-  # VBoxClient --display
-  # VBoxClient --checkhostversion
-  # VBoxClient --seamless
+  VBoxClient --clipboard
+  VBoxClient --draganddrop
+  VBoxClient --vmsvga
+  VBoxClient --checkhostversion
+  VBoxClient --seamless
   
 
   # GNS3 z vgrajenim wiresharkom
-  # add-apt-repository ppa:gns3/ppa -y
-  DEBIAN_FRONTEND=noninteractive apk add ppa:gns3/ppa
-  DEBIAN_FRONTEND=noninteractive apk add gns3-gui gns3-server
+  add-apt-repository ppa:gns3/ppa -y
+  DEBIAN_FRONTEND=noninteractive apt install -y gns3-gui gns3-server
   
-  # uporabni tool
-  apk add nano
   SCRIPT
   
   
@@ -72,5 +61,7 @@ Vagrant.configure("2") do |config|
     s.inline = "echo reboot is happening"
     s.reboot = true
   end
+
+  # config.vm.provision "shell", inline: "service lightdm start"
 
 end
