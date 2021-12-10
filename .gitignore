@@ -1,3 +1,5 @@
 # do not track this files
 Vagrant_way/.vagrant
 Vagrant_way/poskusi.rb
+
+vagrant_alpine/.vagrant
