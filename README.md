@@ -4,8 +4,10 @@
 
 Poženi `vagrant up`. S tem boš generiral virtualko in lahko traja okoli 10 minut. Odpri VirtualBox, če ti ga ni že samo zagnalo, in se prijavi. 
 
-```user_name: vagrant
-password: vagrant```
+```
+user_name: vagrant
+password: vagrant
+```
 
 Opozorilo!
 ***Tipkovnica je ameriška.***
