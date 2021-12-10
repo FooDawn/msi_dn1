@@ -37,7 +37,7 @@ Vagrant.configure("2") do |config|
   
   config.vm.provision "shell", inline: <<-SCRIPT
   apt update 
-  DEBIAN_FRONTEND=noninteractive apt upgrade -y
+  apt upgrade -y
 
   # GUI 
   # DEBIAN_FRONTEND=noninteractive apt-get install -y xfce4 virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
@@ -59,15 +59,16 @@ Vagrant.configure("2") do |config|
 
   # to check if it's running type: sudo systemctl status docker 
 
-
   # GNS3 z vgrajenim wiresharkom
   add-apt-repository ppa:gns3/ppa -y
   DEBIAN_FRONTEND=noninteractive apt install gns3-gui gns3-server -y
   # dpkg-reconfigure debconf --frontend=noninteractive
   
-  # ADD NON SUDO USER TO GNS3, WIRESHARK, UBRINGE
-  # usermod -aG ubridge libvirt kvm wireshark $vagrant
+  # ADD NON-SUDO USER TO GNS3, WIRESHARK, UBRINGE
+  usermod -aG ubridge,libvirt,kvm vagrant
 
+  # browser to submit homework
+  apt install midori -y
   
   SCRIPT
   
@@ -77,7 +78,5 @@ Vagrant.configure("2") do |config|
     s.inline = "echo reboot is happening"
     s.reboot = true
   end
-
-  # config.vm.provision "shell", inline: "service lightdm start"
 
 end
