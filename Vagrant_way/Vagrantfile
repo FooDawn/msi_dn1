@@ -38,18 +38,14 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SCRIPT
   apt update 
   apt upgrade -y
-
+  export DEBIAN_FRONTEND=noninteractive
   # GUI 
-  # DEBIAN_FRONTEND=noninteractive apt-get install -y xfce4 virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
-  DEBIAN_FRONTEND=noninteractive apt-get install -y xfce4 
+  # DEBIAN_FRONTEND=noninteractive apt-get install -y xfce4 
+  apt-get install debconf-utils -y
 
-  # VBox extra for better experience
-  # VBoxClient --clipboard
-  # VBoxClient --draganddrop
-  # VBoxClient --vmsvga
-  # VBoxClient --checkhostversion
-  # VBoxClient --seamless
-  
+  echo "gdm3 shared/default-x-display-manager select  lightdm\nlightdm shared/default-x-display-manager select  lightdm" | debconf-set-selections
+  apt-get install -y xfce4 
+
   # docker so that gns3 will be able to run currectly
   apt install -y apt-transport-https ca-certificates curl software-properties-common
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -61,10 +57,11 @@ Vagrant.configure("2") do |config|
 
   # GNS3 z vgrajenim wiresharkom
   add-apt-repository ppa:gns3/ppa -y
-  DEBIAN_FRONTEND=noninteractive apt install gns3-gui gns3-server -y
-  # dpkg-reconfigure debconf --frontend=noninteractive
+
+  echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections
+  apt install gns3-gui gns3-server -y
   
-  # ADD NON-SUDO USER TO GNS3, WIRESHARK, UBRINGE
+  # ADD NON-SUDO USER TO GNS3, UBRINGE
   usermod -aG ubridge,libvirt,kvm vagrant
 
   # browser to submit homework
