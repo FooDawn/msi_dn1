@@ -1,18 +1,7 @@
 
-# All Vagrant configuration is done below. The "2" in Vagrant.configure
-# configures the configuration version (we support older styles for
-# backwards compatibility). Please don't change it unless you know what
-# you're doing.
+
 Vagrant.configure("2") do |config|
-  # The most common configuration options are documented and commented below.
-  # For a complete reference, please see the online documentation at
-  # https://docs.vagrantup.com.
-
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://vagrantcloud.com/search.
   config.vm.box = "ubuntu/focal64"
-  # config.vm.box = "generic/alpine314"
-
   
   # via 127.0.0.1 to disable public access
   # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
@@ -35,40 +24,9 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--vram", "256"]
   end
   
-  config.vm.provision "shell", inline: <<-SCRIPT
-  apt update 
-  apt upgrade -y
-  export DEBIAN_FRONTEND=noninteractive
-  # GUI 
-  # DEBIAN_FRONTEND=noninteractive apt-get install -y xfce4 
-  apt-get install debconf-utils -y
+  config.vm.provision "shell", path: "script.sh"
+  # config.vm.provision "file", source: "config", destination: "~/.config/i3/config"
 
-  echo "gdm3 shared/default-x-display-manager select  lightdm\nlightdm shared/default-x-display-manager select  lightdm" | debconf-set-selections
-  apt-get install -y xfce4 
-
-  # docker so that gns3 will be able to run currectly
-  apt install -y apt-transport-https ca-certificates curl software-properties-common
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-  apt-cache policy docker-ce
-  apt install docker-ce -y
-
-  # to check if it's running type: sudo systemctl status docker 
-
-  # GNS3 z vgrajenim wiresharkom
-  add-apt-repository ppa:gns3/ppa -y
-
-  echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections
-  apt install gns3-gui gns3-server -y
-  
-  # ADD NON-SUDO USER TO GNS3, UBRINGE
-  usermod -aG ubridge,libvirt,kvm vagrant
-
-  # browser to submit homework
-  apt install midori -y
-  
-  SCRIPT
-  
   
   config.vm.provision "shell" do |s|
     s.privileged = true
