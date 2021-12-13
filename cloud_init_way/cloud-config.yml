@@ -1,5 +1,8 @@
 #cloud-config
 
+package_update: true
+package_upgrade: true
+
 groups:
   - cloud-users
   - docker
@@ -13,18 +16,12 @@ users:
     sudo: False
 
 packages:
- - i3
- - xinit
- - midori
-
-# INSTALING DOCKER
-apt:
-  sources:
-    docker.list:
-      source: deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable
-      keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
-
-packages:
+  - i3
+  - xinit
+  - midori
+  # for remote desktop access
+  - xrdp
+  # docker
   - apt-transport-https 
   - ca-certificates 
   - curl 
@@ -33,6 +30,14 @@ packages:
   - docker-ce
   - docker-ce-cli
   - containerd.io
+
+# INSTALING DOCKER
+apt:
+  sources:
+    docker.list:
+      source: deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable
+      keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+  
 
 # Enable ipv4 forwarding, required on CIS hardened machines
 write_files:
@@ -60,6 +65,12 @@ bootcmd:
 runcmd:
   - echo "exec i3" >> ~/.xinitrc
   - usermod -aG ubridge,libvirt,kvm,docker gns3_user
+  - mkdir -p /home/gns3_user/.config/i3
+  - mv /config /home/gns3_user/.config/i3/config
+  # remote access ????
+  - systemctl enable --now xrdp
+  - ufw allow from any to any port 3389 proto tcp
+
 
 power_state:
   delay: "+30"
