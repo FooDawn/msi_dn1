@@ -22,9 +22,7 @@ packages:
   - i3
   - xinit
   - midori
-  # for remote desktop access
   - xrdp
-  # docker
   - apt-transport-https 
   - ca-certificates 
   - curl 
@@ -38,7 +36,7 @@ packages:
 apt:
   sources:
     docker.list:
-      source: deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable
+      source: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
       keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
   
 
@@ -64,9 +62,6 @@ write_files:
 users:
   - name: gns3_user
     groups: ssl-cert, ubridge, libvirt, kvm, docker
-
-bootcmd:
-  - systemctl enable xrdp
   
 runcmd:
   - add-apt-repository "ppa:gns3/ppa" -y 
@@ -74,8 +69,8 @@ runcmd:
   - echo "exec i3" >> ~/.xinitrc
   - mkdir -p /home/gns3_user/.config/i3
   - mv /config /home/gns3_user/.config/i3/config
-  # remote access ????
-  # - ufw allow from any to any port 3389 proto tcp
+  - systemctl enable xrdp
+  - ufw allow from any to any port 3389 proto tcp
 
 
 

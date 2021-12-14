@@ -1,0 +1,14 @@
+az vm create --resource-group myMsiHW --name myMsiVM --image UbuntuLTS --admin-username azureuser --generate-ssh-keys --custom-data cloud-config.yml
+SSH key files '/home/aa9629/.ssh/id_rsa' and '/home/aa9629/.ssh/id_rsa.pub' have been generated under ~/.ssh to allow SSH access to the VM. If using machines without permanent storage, back up your keys to a safe location.
+It is recommended to use parameter "--public-ip-sku Standard" to create new VM with Standard public IP. Please note that the default public IP used for VM creation will be changed from Basic to Standard in the future.
+{
+  "fqdns": "",
+  "id": "/subscriptions/be379014-cf47-4cfd-9122-3d803cd355dd/resourceGroups/myMsiHW/providers/Microsoft.Compute/virtualMachines/myMsiVM",
+  "location": "eastus",
+  "macAddress": "00-0D-3A-1B-7E-86",
+  "powerState": "VM running",
+  "privateIpAddress": "10.0.0.4",
+  "publicIpAddress": "52.188.123.198",
+  "resourceGroup": "myMsiHW",
+  "zones": ""
+}
