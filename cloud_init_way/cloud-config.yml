@@ -6,9 +6,12 @@ package_upgrade: true
 groups:
   - cloud-users
   - docker
+  - ssl-cert
 
 users:
   - default
+  - name: xrdp 
+    primary_group: ssl-cert
   - name: gns3_user
     plain_text_passwd: 'ubuntu_msi12'
     primary_group: cloud-users
@@ -58,18 +61,22 @@ write_files:
     path: /config
     permissions: '0644'
 
-bootcmd:
-  - add-apt-repository ppa:gns3/ppa -y 
-  - DEBIAN_FRONTEND=noninteractive apt-get install gns3-gui gns3-server -y 
+users:
+  - name: gns3_user
+    groups: ssl-cert, ubridge, libvirt, kvm, docker
 
+bootcmd:
+  - systemctl enable xrdp
+  
 runcmd:
+  - add-apt-repository "ppa:gns3/ppa" -y 
+  - DEBIAN_FRONTEND=noninteractive apt-get install gns3-gui gns3-server -y 
   - echo "exec i3" >> ~/.xinitrc
-  - usermod -aG ubridge,libvirt,kvm,docker gns3_user
   - mkdir -p /home/gns3_user/.config/i3
   - mv /config /home/gns3_user/.config/i3/config
   # remote access ????
-  - systemctl enable --now xrdp
-  - ufw allow from any to any port 3389 proto tcp
+  # - ufw allow from any to any port 3389 proto tcp
+
 
 
 power_state:
