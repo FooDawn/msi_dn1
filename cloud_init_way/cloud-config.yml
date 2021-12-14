@@ -19,10 +19,20 @@ users:
     sudo: False
 
 packages:
-  - i3
+  - xorg
   - xinit
+  - i3
   - midori
   - xrdp
+  
+# INSTALING DOCKER
+apt:
+  sources:
+    docker.list:
+      source: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+      keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+  
+packages:
   - apt-transport-https 
   - ca-certificates 
   - curl 
@@ -31,14 +41,6 @@ packages:
   - docker-ce
   - docker-ce-cli
   - containerd.io
-
-# INSTALING DOCKER
-apt:
-  sources:
-    docker.list:
-      source: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
-      keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
-  
 
 # Enable ipv4 forwarding, required on CIS hardened machines
 write_files:
@@ -58,11 +60,7 @@ write_files:
     owner: root:root
     path: /config
     permissions: '0644'
-
-users:
-  - name: gns3_user
-    groups: ssl-cert, ubridge, libvirt, kvm, docker
-  
+ 
 runcmd:
   - add-apt-repository "ppa:gns3/ppa" -y 
   - DEBIAN_FRONTEND=noninteractive apt-get install gns3-gui gns3-server -y 
@@ -72,7 +70,9 @@ runcmd:
   - systemctl enable xrdp
   - ufw allow from any to any port 3389 proto tcp
 
-
+users:
+  - name: gns3_user
+    groups: [ssl-cert, ubridge, libvirt, kvm, docker]
 
 power_state:
   delay: "+30"
