@@ -1,0 +1,9 @@
+Setting up ubridge (0.9.18-1~focal2) ...
+[ 1589.510490] cloud-init[2012]: The group `ubridge' already exists and is not a system group. Exiting.
+[ 1589.517388] cloud-init[2012]: Executing "addgroup --quiet --system ubridge" failed.
+[ 1589.524508] cloud-init[2012]: Most probably the ubridge group exists, but is not a system group.
+[ 1589.533674] cloud-init[2012]: Please delete the existing group or re-create it as a system group and try configuring ubridge again.
+[ 1589.600616] cloud-init[2012]: dpkg: error processing package ubridge (--configure):
+[ 1589.625100] cloud-init[2012]:  installed ubridge package post-installation script subprocess returned error exit status 1
+
+

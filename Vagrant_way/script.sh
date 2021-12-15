@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "Updating and upgrading"
 apt-get update > /dev/null
 apt-get upgrade -y > /dev/null
@@ -20,7 +22,7 @@ apt-cache policy docker-ce > /dev/nul
 apt-get install docker-ce -y > /dev/nul
 
 
-# to check if it's running type: sudo systemctl status docker 
+# to check if it's running type: sudo systemctl status docker  docker run hello-world
 
 echo "Installing GNS3 with build-in wireshark"
 add-apt-repository ppa:gns3/ppa -y > /dev/nul
@@ -33,4 +35,11 @@ usermod -aG ubridge,libvirt,kvm,docker vagrant
 echo "Installing midori browser"
 apt-get install midori -y > /dev/nul
 
+echo "Installing XRDP"
+apt-get install xrdp -y > /dev/null
+adduser xrdp ssl-cert  
+systemctl restart xrdp
+
 echo "FINISHED"       
+
+done
