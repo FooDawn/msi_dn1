@@ -153,8 +153,10 @@ bindsym Mod1+Shift+9 move container to workspace number $ws9
 bindsym Mod1+Shift+0 move container to workspace number $ws10
 
 # keyboard layout
-exec "setxkbmap -layout si,us"
-exec "setxkbmap -option 'grp:ctrl_alt_toggle'"
+set $ms Mod4
+bindsym $ms+s exec setxkbmap si
+bindsym $ms+u exec setxkbmap us
+exec "setxkbmap -layout si"
 
 # reload the configuration file
 bindsym Mod1+Shift+c reload
