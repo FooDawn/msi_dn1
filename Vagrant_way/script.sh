@@ -8,7 +8,7 @@ apt-get install debconf-utils -y > /dev/nul
 export DEBIAN_FRONTEND=noninteractive
 
 echo "Installing i3 Window Manager"
-apt-get install xorg -y > /dev/nul
+# apt-get install xorg -y > /dev/nul
 apt-get install xinit -y > /dev/nul
 apt-get install i3 -y > /dev/nul
 echo "exec i3" >> ~/.xinitrc
@@ -31,7 +31,7 @@ echo "ubridge ubridge/install-setuid  boolean true" | debconf-set-selections
 apt-get install gns3-gui gns3-server -y > /dev/nul
 
 # ADD NON-SUDO USER TO GNS3, UBRINGE
-usermod -aG libvirt,kvm,docker,wireshark vagrant
+usermod -aG libvirt,kvm,docker,wireshark,ubridge vagrant
 
 echo "Installing midori browser"
 apt-get install midori -y > /dev/nul
