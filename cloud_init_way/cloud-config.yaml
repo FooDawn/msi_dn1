@@ -18,6 +18,8 @@ users:
     groups: ssl-cert, libvirt, kvm, docker
     lock_passwd: False
     sudo: False
+    shell: /bin/bash
+
  
 # INSTALING DOCKER
 apt:
@@ -61,12 +63,14 @@ system_info:
 runcmd:  
   - add-apt-repository "ppa:gns3/ppa" -y 
   - echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections
-  - echo "ubridge ubridge/install-setuid  boolean true" | debconf-set-selections
   - DEBIAN_FRONTEND=noninteractive apt-get install gns3-gui gns3-server -y 
-  - usermod -aG ubridge, wireshark user
-  - usermod -aG ubridge, wireshark ubuntu
+  - usermod -aG ubridge,wireshark user
   - mkdir -p /home/user/.config/i3
   - mv /config /home/user/.config/i3/config
+  - chown -R user /usr/bin/dumpcap
+  - chown -R user /home/user
+  # - dpkg-reconfigure wireshark-common
+  # - chmod +x /usr/bin/dumpcap
   - echo "exec i3" >> ~/.xinitrc
   - systemctl enable xrdp
   - ufw allow from any to any port 3389 proto tcp 
