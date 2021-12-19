@@ -3,3 +3,6 @@ Vagrant_way/.vagrant
 Vagrant_way/poskusi.rb
 
 vagrant_alpine/.vagrant
+
+base64_zapis.txt
+skripta_base.py
