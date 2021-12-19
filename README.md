@@ -101,7 +101,8 @@ password: ubuntumsi12
 Prvi problem je bil že kako sploh vitrualko bootstrapat z cloud-initom na Azure-ju. To sem ugotovila, da je en izmed najmanjših kradratkov pravi prostor za kopiranje code od cloud-config.yml.
 Drugi problem je bil, da se nisem mogla povezati gor. Ne preko RDP, kljub temu da naj bi bil port odprt in xrdp naložen, ne preko ssh, prav tako ne z Bastion. Zato sem probala s čisto prazno virtualko Ubuntu 20.04 gen 1, to je delovalo. Nato sem nadaljevala postopoma. Tako sem odkrila, da Docker pravilno naloži in deluje. Nato sem prešla na multipass.  
 Sedaj glede na izpisano deluje in se vse naloži, še vedno se pa ne znam povezati na virtualko.
-Wireshark ne želi dodati user v skupino
+Wireshark doda user v skupino wireshark vendar ga nima user pravic uporabljati. Problema nisem razrešila.
+
 ## Proces
 1. Kreira se Ubuntu 20.04 LTS VM
 2. Zapiše se datoteka config in omogoči se ipv4 forwarding 
