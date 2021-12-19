@@ -2,7 +2,16 @@
 Vagrant_way/.vagrant
 Vagrant_way/poskusi.rb
 
-vagrant_alpine/.vagrant
+vagrant_alpine
 
 base64_zapis.txt
 skripta_base.py
+
+# testiranje cloud-init
+cloud_init_way/azure.txt
+cloud_init_way/myMsiVM_serialconsole.log
+cloud_init_way/potencialni_problem.txt
+cloud_init_way/test_confi.yaml
+
+images/myMsiVM_log
+images/myMsiVM_screenshot.bmp
