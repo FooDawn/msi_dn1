@@ -63,8 +63,9 @@ runcmd:
   - echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections
   - echo "ubridge ubridge/install-setuid  boolean true" | debconf-set-selections
   - DEBIAN_FRONTEND=noninteractive apt-get install gns3-gui gns3-server -y 
-  - usermod -aG ubridge, wireshark user
-  - usermod -aG ubridge, wireshark ubuntu
+  - usermod -aG ubridge user
+  - usermod -aG wireshark user
+  - usermod -aG ubridge,wireshark ubuntu
   - mkdir -p /home/user/.config/i3
   - mv /config /home/user/.config/i3/config
   - echo "exec i3" >> ~/.xinitrc
