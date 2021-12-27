@@ -49,9 +49,23 @@ Klikneš na user ali vagrant
 Klikneš na kolešček in izbereš i3
 ![vpis](/images/vpis.png)
 ![vpis_2](/images/vpis_2.png)
-Ter vpišeš geslo
+Ter vpišeš ustrezno geslo
 Potem delaš glede na napotke v [Tipkovnica](#tipkovnica)
 
+Alt + d -> pišeš gns3, ter klikneš Enter.
+![gns3_1](/images/gns3_1.png)
+Izbereš Run appliances on my local computer, ker klikneš Next. Izberi vse default nastavitv ter klikaj OK vse do Finish.
+![gns3_2](/images/gns3_2.png)
+Klikni na obkrožen del in poimenuj svoj projekt.
+![gns3_3](/images/gns3_3.png)
+Sedaj delaj kar želiš/moraš. Recimo lahko greš med All devices ter izbereš VPCS ter se sprobaš če vse dela kot more.
+![gns3_4](/images/gns3_4.png)
+Z desnim klikom na PC1 dobiš več možnosti. Prvo ga moraš zagnati, da lahko odpreš konzolo. Opozorilo če bi gns3 aplikacija v Fullscreen načinu, se ti bo konzola odprla vendar je ne boš videl. Pojdi ven iz Fullscreen načina in jo boš videl.
+![gns3_5](/images/gns3_5.png)
+
+Alt + d -> vpišeš wireshark in klikneš Enter.
+![wireshark](/images/wireshark.png)
+Sedaj se lahko igraš z wireshark-om.
 
 # Vagrant
 Pojdi v datoteko Vagrant_way in poženi ukaze 
@@ -61,6 +75,13 @@ sed -i 's/\r//' config
 vagrant up
 ```
 S tem se boš premaknil v ustrezno mapo, zagotovil ga ima config file pravilne končnice vrstic in generiral virtualko in lahko traja okoli 10 minut. 
+Če se zgodi timeout, uniči kar se je naredilo. Ponovno zaženi ```vagrant up``` in odpri nastavitve v Vitrualbox, ter preveri tam kakšne nastavitve imaš za omrežje.
+```bash
+vagrant destroy 
+# vpišeš yes
+vagrant up
+```
+![check_network](/images/network.png)
 
 ```
 ip: 127.0.0.1:3389
